@@ -44,3 +44,70 @@ etl-commerce-python/
 ├── requirements.txt
 ├── .gitignore
 └── README.md
+
+## Input files
+
+The script expects these input files inside `data/raw/`:
+
+- `customers.csv`
+- `products.csv`
+- `orders.csv`
+
+These files contain sample e-commerce data with a few intentional inconsistencies, such as:
+
+- emails with extra spaces or uppercase letters
+- missing country values
+- cancelled orders
+- product references that do not exist in the product table
+
+## Transformation logic
+
+The ETL process currently applies the following rules:
+
+### Customers
+
+- trims spaces from `email`
+- converts `email` to lowercase
+- replaces missing or empty `country` values with `UNKNOWN`
+- converts `country` to uppercase
+
+### Orders
+
+- converts `order_date` to a date format
+- keeps only orders with `status = completed`
+- removes orders with invalid `product_id` values
+
+### Final dataset
+
+- joins orders with customers using `customer_id`
+- joins the result with products using `product_id`
+- creates a new column: `total_amount = quantity * price`
+
+### Summary output
+
+- groups sales by country
+- calculates:
+  - `total_orders`
+  - `total_revenue`
+
+## Output files
+
+The script generates these files inside `data/output/`:
+
+- `sales_clean.csv`
+- `country_summary.csv`
+
+These output files are intentionally ignored by Git, since they are generated artifacts rather than source files.
+
+## Tech used
+
+- Python
+- pandas
+- Git
+- GitHub
+
+## Install dependencies
+
+```bash
+pip install -r requirements.txt
+
