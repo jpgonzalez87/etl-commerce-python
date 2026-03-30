@@ -15,11 +15,28 @@ customers = pd.read_csv(RAW_DIR / "customers.csv")
 products = pd.read_csv(RAW_DIR / "products.csv")
 orders = pd.read_csv(RAW_DIR / "orders.csv")
 
-print("\n--- CUSTOMERS ---")
+print("\n--- CUSTOMERS ORIGINAL ---")
+print(customers)
+
+# Transform: clean customers
+customers["email"] = customers["email"].str.strip().str.lower()
+customers["country"] = customers["country"].fillna("UNKNOWN")
+customers["country"] = customers["country"].replace("", "UNKNOWN")
+customers["country"] = customers["country"].str.upper()
+
+print("\n--- CUSTOMERS CLEAN ---")
 print(customers)
 
 print("\n--- PRODUCTS ---")
 print(products)
 
-print("\n--- ORDERS ---")
+print("\n--- ORDERS ORIGINAL ---")
+print(orders)
+
+# Transform: clean orders
+orders["order_date"] = pd.to_datetime(orders["order_date"], errors="coerce")
+orders = orders[orders["status"] == "completed"]
+orders = orders[orders["product_id"].isin(products["product_id"])]
+
+print("\n--- ORDERS CLEAN ---")
 print(orders)
