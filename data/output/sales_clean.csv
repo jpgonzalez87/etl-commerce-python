@@ -1,0 +1,5 @@
+order_id,order_date,customer_id,name,email,country,product_id,product_name,category,quantity,price,total_amount
+1001,2026-03-01,1,Ana Pérez,ana@example.com,UY,101,Laptop,Electronics,1,1200,1200
+1002,2026-03-02,2,Juan Silva,juan.silva@example.com,UY,102,Mouse,Electronics,2,25,50
+1004,2026-03-03,1,Ana Pérez,ana@example.com,UY,102,Mouse,Electronics,3,25,75
+1005,2026-03-03,4,Pedro Gómez,pedro.gomez@example.com,AR,103,Desk,Furniture,1,300,300
