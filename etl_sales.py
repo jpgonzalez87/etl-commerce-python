@@ -64,8 +64,8 @@ country_summary = (
 )
 
 # Load / export
-sales_clean.to_csv(OUTPUT_DIR / "sales_clean.csv", index=False)
-country_summary.to_csv(OUTPUT_DIR / "country_summary.csv", index=False)
+sales_clean.to_csv(OUTPUT_DIR / "sales_clean.csv", index=False, encoding="utf-8-sig")
+country_summary.to_csv(OUTPUT_DIR / "country_summary.csv", index=False, encoding="utf-8-sig")
 
 print("\n--- SALES CLEAN ---")
 print(sales_clean)
