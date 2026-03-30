@@ -40,3 +40,15 @@ orders = orders[orders["product_id"].isin(products["product_id"])]
 
 print("\n--- ORDERS CLEAN ---")
 print(orders)
+
+# Join 1: orders + customers
+sales = orders.merge(customers, on="customer_id", how="inner")
+
+print("\n--- SALES AFTER JOIN WITH CUSTOMERS ---")
+print(sales)
+
+# Join 2: sales + products
+sales = sales.merge(products, on="product_id", how="inner")
+
+print("\n--- SALES AFTER JOIN WITH PRODUCTS ---")
+print(sales)
