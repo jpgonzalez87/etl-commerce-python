@@ -52,3 +52,9 @@ sales = sales.merge(products, on="product_id", how="inner")
 
 print("\n--- SALES AFTER JOIN WITH PRODUCTS ---")
 print(sales)
+
+# Calculated column
+sales["total_amount"] = sales["quantity"] * sales["price"]
+
+print("\n--- SALES WITH TOTAL AMOUNT ---")
+print(sales)
