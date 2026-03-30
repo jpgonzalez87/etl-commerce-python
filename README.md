@@ -1,8 +1,10 @@
 # ETL Commerce Python
 
-A small ETL practice project built with Python and pandas.
+A small ETL practice project built with **Python** and **pandas**.
 
 This project was created as part of my learning journey as a Business Analyst who is gradually expanding into data analysis and data engineering. The goal was not to build something overly complex, but to understand the ETL flow end to end in a practical and approachable way.
+
+---
 
 ## Project overview
 
@@ -10,9 +12,13 @@ This script reads raw CSV files, cleans and transforms the data, joins related d
 
 It follows a simple ETL structure:
 
-- **Extract**: read raw input files
-- **Transform**: clean, filter, join, and enrich data
-- **Load**: export final datasets for analysis
+| Step | What it does |
+|------|----------------|
+| **Extract** | Read raw input files |
+| **Transform** | Clean, filter, join, and enrich data |
+| **Load** | Export final datasets for analysis |
+
+---
 
 ## Why I built this
 
@@ -30,6 +36,8 @@ It helped me practice:
 - structuring a small project in a more maintainable way
 - versioning the work step by step with Git and GitHub
 
+---
+
 ## Project structure
 
 ```text
@@ -46,13 +54,17 @@ etl-commerce-python/
 └── README.md
 ```
 
+---
+
 ## Input files
 
-The script expects these input files inside data/raw/:
+The script expects these input files inside `data/raw/`:
 
-- customers.csv
-- products.csv
-- orders.csv
+| File | Role |
+|------|------|
+| `customers.csv` | Customer master data |
+| `products.csv` | Product catalog |
+| `orders.csv` | Order lines |
 
 These files contain sample e-commerce data with a few intentional inconsistencies, such as:
 
@@ -61,59 +73,76 @@ These files contain sample e-commerce data with a few intentional inconsistencie
 - cancelled orders
 - product references that do not exist in the product table
 
+---
+
 ## Transformation logic
 
-The ETL process currently applies the following rules:
+The ETL process currently applies the following rules.
 
 ### Customers
 
-- trims spaces from email
-- converts email to lowercase
-- replaces missing or empty country values with UNKNOWN
-- converts country to uppercase
+- Trim spaces from `email`
+- Convert `email` to lowercase
+- Replace missing or empty `country` values with `UNKNOWN`
+- Convert `country` to uppercase
 
 ### Orders
 
-- converts order_date to a date format
-- keeps only orders with status = completed
-- removes orders with invalid product_id values
+- Convert `order_date` to a date format
+- Keep only orders with `status = completed`
+- Remove orders with invalid `product_id` values
 
 ### Final dataset
 
-- joins orders with customers using customer_id
-- joins the result with products using product_id
-- creates a new column: total_amount = quantity * price
+- Join orders with customers on `customer_id`
+- Join the result with products on `product_id`
+- Add column: `total_amount = quantity * price`
 
 ### Summary output
 
-- groups sales by country
-- calculates:
-  - total_orders
-  - total_revenue
+- Group sales by `country`
+- Calculate:
+  - `total_orders`
+  - `total_revenue`
+
+---
 
 ## Output files
 
-The script generates these files inside data/output/:
+The script generates these files inside `data/output/`:
 
-- sales_clean.csv
-- country_summary.csv
+| File | Contents |
+|------|----------|
+| `sales_clean.csv` | Clean, joined sales rows |
+| `country_summary.csv` | Aggregates by country |
 
 These output files are intentionally ignored by Git, since they are generated artifacts rather than source files.
 
+---
+
 ## Tech used
 
-- Python
-- pandas
-- Git
-- GitHub
+- **Python**
+- **pandas**
+- **Git** & **GitHub**
+
+---
 
 ## Install dependencies
 
-- `pip install -r requirements.txt`
+```bash
+pip install -r requirements.txt
+```
+
+---
 
 ## Run the project
 
-- `python etl_sales.py`
+```bash
+python etl_sales.py
+```
+
+---
 
 ## Expected result
 
@@ -121,19 +150,27 @@ The script should:
 
 - generate a clean sales file with valid completed orders
 - generate a country-level summary of total orders and revenue
-- export both files to data/output/
+- export both files to `data/output/`
 
 For the sample data currently included in the project, the expected summary is:
 
-- AR → 1 order → 300 revenue
-- UY → 3 orders → 1325 revenue
+| Country | Orders | Revenue |
+|---------|--------|---------|
+| AR | 1 | 300 |
+| UY | 3 | 1325 |
+
+---
 
 ## Notes
 
-- One small but useful detail in this project is that output CSV files are exported using utf-8-sig encoding so they open correctly in Excel on Windows, especially when names contain accented characters.
+One small but useful detail in this project is that output CSV files are exported using **`utf-8-sig`** encoding so they open correctly in **Excel on Windows**, especially when names contain accented characters.
+
+---
 
 ## Final thought
 
-- This is a small learning project, but a meaningful one for me.
-- It reflects the kind of growth I am currently pursuing: expanding my BA toolkit with more practical data skills, step by step, with curiosity and consistency.
-- I hope it can also be helpful for other BAs or professionals who are exploring a similar path.
+This is a small learning project, but a meaningful one for me.
+
+It reflects the kind of growth I am currently pursuing: expanding my BA toolkit with more practical data skills, step by step, with curiosity and consistency.
+
+I hope it can also be helpful for other BAs or professionals who are exploring a similar path.
